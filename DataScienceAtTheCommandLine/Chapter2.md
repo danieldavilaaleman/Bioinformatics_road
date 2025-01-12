@@ -22,5 +22,11 @@ cowsay "Let's moove\!"
                 ||     ||
 ```
 
+To add the /data directory which contains the data need it to reproduce the book's exercise, I **exit** the container and ran:
+```
+docker run --rm -it -v "$(pwd)":/data datasciencetoolbox/dsatcl2e
+```
+
+
 
 
