@@ -29,6 +29,17 @@ docker run --rm -it -v "$(pwd)":/data datasciencetoolbox/dsatcl2e
 
 Now, I am ready to start learning!!!
 
+## Combining Command-Line Tools
+
+Each tool has three standard communication streams: 
+1. Standard input (**stdin**)
+2. Standard output (**stdout**)
+3. Standard error (**stderr**)
+
+### Pipe
+```
+curl -s "https://www.gutenberg.org/files/11/11-0.txt" | grep "CHAPTER"
+```
 
 
 
