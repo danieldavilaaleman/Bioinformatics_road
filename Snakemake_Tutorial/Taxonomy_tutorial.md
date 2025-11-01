@@ -14,4 +14,25 @@ We need to install Snakemake and all the required tools for our pipeline. In thi
 
 For this step, we will use `mamba`, a fast and efficient version of `conda`, to create an environment with all the tools and dependecies need it in this project.
 
+#### Install conda (if you do not have it)
+Go to [Miniconda installation site](https://www.anaconda.com/docs/getting-started/miniconda/install) to check installation instructions.
+
+#### Create a conda environment that contains Snakemake, fastp, seqtk, and mmseqs2
+Create the conda environment usinf the `environment.yaml`:
+```
+name: snakemake-tutorial
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - mamba
+  - snakemake
+  - fastp
+  - mmseqs2
+  - sra-tools
+  - graphviz
+
+```
+
 
