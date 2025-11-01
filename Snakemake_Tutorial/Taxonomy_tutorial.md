@@ -26,7 +26,6 @@ channels:
   - bioconda
   - defaults
 dependencies:
-  - mamba
   - snakemake
   - fastp
   - seqtk
