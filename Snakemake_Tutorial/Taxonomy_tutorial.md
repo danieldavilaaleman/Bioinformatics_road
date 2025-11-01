@@ -29,6 +29,7 @@ dependencies:
   - mamba
   - snakemake
   - fastp
+  - seqtk
   - mmseqs2
   - sra-tools
   - graphviz
