@@ -28,7 +28,7 @@ channels:
 dependencies:
   - snakemake
   - fastp
-  - seqtk
+  - seqkit
   - mmseqs2
   - graphviz
 
