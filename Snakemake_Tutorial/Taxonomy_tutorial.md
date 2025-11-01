@@ -30,7 +30,6 @@ dependencies:
   - fastp
   - seqtk
   - mmseqs2
-  - sra-tools
   - graphviz
 
 ```
