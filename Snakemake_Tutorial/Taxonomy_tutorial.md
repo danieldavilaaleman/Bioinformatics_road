@@ -12,6 +12,6 @@ This tutorial is based on the official [Snakemake tutorial documentation](https:
 ## Step 1 - Installation
 We need to install Snakemake and all the required tools for our pipeline. In this case, we need to install `fastp, seqtk`, and `mmseqs2`.
 
-For this step, we will use `mamba`, which is a faster and robust version of `conda`, to create an environment with all the tools and dependecies need it in this project.
+For this step, we will use `mamba`, a fast and efficient version of `conda`, to create an environment with all the tools and dependecies need it in this project.
 
 
