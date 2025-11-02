@@ -241,7 +241,7 @@ rule reads_taxonomy:
 	shell:
 		"""
 		mmseqs createdb {input} data/taxonomy/{wildcards.sample}.DB
-		mmseqs taxonomy data/taxonomy/{wildcards.sample}.DB data/mmseqs_DB/uniprot_sprot {wildcards.sample}.lca_results data/taxonomy/tmp -s 2
+		mmseqs taxonomy data/taxonomy/{wildcards.sample}.DB data/mmseqs_DB/uniprot_sprot data/taxonomy/{wildcards.sample}.lca_results data/taxonomy/tmp -s 2
 		"""
 
 rule taxonomy_visualization:
