@@ -53,7 +53,7 @@ rule clean_reads:
 		"fastp -i {input} -o {output}"
 ```
 3. Check that the Snakefile file works properly, try a "dry" run.
-`snakemake -np`
+`snakemake -np data/clean_reads/ERR318619_clean.fastq.gz`
 
 4. Run the Snakemake pipeline
 `snakemake --cores 8 --sdm conda`
