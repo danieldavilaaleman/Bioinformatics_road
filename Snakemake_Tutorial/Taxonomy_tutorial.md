@@ -103,7 +103,7 @@ The las rule will only work for the sample `ERR318619.fastq.gz` but we can use *
 3. Check Snakefile file with a "dry" run. NOTE:dry run ask for the output file.
 `snakemake -np data/stats/{ERR318619,ERR318620,ERR429199}_stats.txt`
 
-## Step 5 - Adding rule for taxonomy classification and results visualization
+## Step 5 - Adding rule for taxonomy classification - {wildcards.sample}
 1. `vim Snakefile`
 2. ```
    rule clean_reads:
@@ -143,4 +143,53 @@ The las rule will only work for the sample `ERR318619.fastq.gz` but we can use *
 3. Check Snakefile with "dry" run
   `snakemake -np data/stats/{ERR318619,ERR318620,ERR429199}_stats.txt data/taxonomy/{ERR318619,ERR318620,ERR429199}.lca.tsv`
 
+## Step 6 - Adding the last rule, taxonomy visualization
+1. `vim Snakefile`
+2. ```
+   rule clean_reads:
+	input:
+		"data/raw_reads/{sample}.fastq.gz"
+	output:
+		"data/clean_reads/{sample}_clean.fastq.gz"
+	conda:
+		"/Users/danieldavila/miniconda3/envs/snakemake-tutorial"
+	shell:
+		"fastp -i {input} -o {output}"
 
+   rule reads_stats:
+	input:
+		"data/clean_reads/{sample}_clean.fastq.gz"
+	output:
+		"data/stats/{sample}_stats.txt"
+	conda:
+		"/Users/danieldavila/miniconda3/envs/snakemake-tutorial"
+	shell:
+		"seqkit stats {input} > {output}"
+
+   rule reads_taxonomy:
+	input:
+		"data/clean_reads/{sample}_clean.fastq.gz"
+	output:
+		"data/taxonomy/{sample}.lca_results"
+	conda:
+		"/Users/danieldavila/miniconda3/envs/snakemake-tutorial"
+	shell:
+		"""
+		mmseqs createdb {input} data/taxonomy/{wildcards.sample}.DB
+		mmseqs taxonomy data/taxonomy/{wildcards.sample}.DB data/mmseqs_DB/uniprot_sprot data/taxonomy/{wildcards.sample}.lca_results tmp -s 1
+		"""
+
+   rule taxonomy_visualization:
+	input:
+		DB="data/mmseqs_DB/uniprot_sprot",
+		results="data/taxonomy/{sample}.lca_results"
+	output:
+		"data/report/{sample}.report.html"
+	conda:
+		"/Users/danieldavila/miniconda3/envs/snakemake-tutorial"
+	shell:
+		"mmseqs taxonomyreport {input.DB} {input.results} {output} --report-mode 1"
+   ```
+   
+3. Check Snakefile with "dry" run
+  `snakemake -np data/report/{ERR318619,ERR318620,ERR429199}.report.html data/stats/{ERR318619,ERR318620,ERR429199}_stats.txt`
