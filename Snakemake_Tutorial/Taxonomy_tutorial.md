@@ -235,25 +235,28 @@ rule reads_taxonomy:
 	input:
 		"data/clean_reads/{sample}_clean.fastq.gz"
 	output:
-		"data/taxonomy/{sample}.lca_results"
+		"data/taxonomy/{sample}.lca_results.dbtype"
 	conda:
 		"/Users/danieldavila/miniconda3/envs/snakemake-tutorial"
 	shell:
 		"""
 		mmseqs createdb {input} data/taxonomy/{wildcards.sample}.DB
-		mmseqs taxonomy data/taxonomy/{wildcards.sample}.DB data/mmseqs_DB/uniprot_sprot data/taxonomy/{wildcards.sample}.lca_results tmp -s 1
+		mmseqs taxonomy data/taxonomy/{wildcards.sample}.DB data/mmseqs_DB/uniprot_sprot {wildcards.sample}.lca_results data/taxonomy/tmp -s 2
 		"""
 
 rule taxonomy_visualization:
 	input:
 		DB="data/mmseqs_DB/uniprot_sprot",
-		results="data/taxonomy/{sample}.lca_results"
+		results="data/taxonomy/{sample}.lca_results.dbtype"
 	output:
 		"data/report/{sample}.report.html"
 	conda:
 		"/Users/danieldavila/miniconda3/envs/snakemake-tutorial"
 	shell:
-		"mmseqs taxonomyreport {input.DB} {input.results} {output} --report-mode 1"
+		"""
+		new_name=$(basename {input.results} .dbtype)
+		mmseqs taxonomyreport {input.DB} data/taxonomy/$new_name {output} --report-mode 1
+		"""
 ```
 Visualization of DAG
 ```snakemake --dag | dot -Tsvg > dag.svg```
