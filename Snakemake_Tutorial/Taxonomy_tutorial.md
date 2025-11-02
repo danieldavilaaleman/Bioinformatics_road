@@ -196,5 +196,8 @@ The las rule will only work for the sample `ERR318619.fastq.gz` but we can use *
 
 ## Step 7 - Generation of Directed acyclic graph (DAG)
 This graph represents the jobs that Snakemake will perform
-`snakemake data/report/{ERR318619,ERR318620,ERR429199}.report.html data/stats/{ERR318619,ERR318620,ERR429199}_stats.txt --dag | dot -Tsvg > dag.svg`
+```
+snakemake data/report/{ERR318619,ERR318620,ERR429199}.report.html data/stats/{ERR318619,ERR318620,ERR429199}_stats.txt --dag | dot -Tsvg > dag.svg
+```
+
 
