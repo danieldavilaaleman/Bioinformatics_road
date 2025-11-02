@@ -44,22 +44,22 @@ Each fastq file is a downsample file of 10,000 reads for demostration purpose.
 ```
 rule clean_reads:
 	input:
-		"data/raw_reads/ERR318619.fastq.gz"
+		"data/raw_reads/Sample1.fastq.gz"
 	output:
-		"data/clean_reads/ERR318619_clean.fastq.gz"
+		"data/clean_reads/Sample1_clean.fastq.gz"
 	conda:
 		"/path/to/miniconda3/envs/snakemake-tutorial"
 	shell:
 		"fastp -i {input} -o {output}"
 ```
 3. Check that the Snakefile file works properly, try a "dry" run.
-`snakemake -np data/clean_reads/ERR318619_clean.fastq.gz`
+`snakemake -np data/clean_reads/Sample1.fastq.gz`
 
 4. Run the Snakemake pipeline
 `snakemake --cores 8 --sdm conda`
 
 ## Step 3 - Generalizing Snakemake rules
-The las rule will only work for the sample `ERR318619.fastq.gz` but we can use **wildcards** to generalize the clean_reads rule.
+The las rule will only work for the sample `Sample1.fastq.gz` but we can use **wildcards** to generalize the clean_reads rule.
 1. `vim Snakefile`
 2. ```
    rule clean_reads:
@@ -73,9 +73,9 @@ The las rule will only work for the sample `ERR318619.fastq.gz` but we can use *
 		"fastp -i {input} -o {output}"
    ```
 3. Check Snakefile file with a "dry" run. NOTE:dry run ask for the output file.
-`snakemake -np data/clean_reads/ERR318620_clean.fastq.gz`
+`snakemake -np data/clean_reads/Sample1_clean.fastq.gz`
 4. Can you specify multiple output targets?
-`snakemake -np data/clean_reads/{ERR318620_clean,ERR429199_clean}.fastq.gz`
+`snakemake -np data/clean_reads/{Sample1,Sample2}_clean.fastq.gz`
 
 ## Step 4 - Adding the second rule, stats of the clean reads.
 1. `vim Snakefile`
@@ -101,7 +101,7 @@ The las rule will only work for the sample `ERR318619.fastq.gz` but we can use *
 		"seqkit stats {input} > {output}"
    ```
 3. Check Snakefile file with a "dry" run. NOTE:dry run ask for the output file.
-`snakemake -np data/stats/{ERR318619,ERR318620,ERR429199}_stats.txt`
+`snakemake -np data/stats/{Sample1, Sample2,Sample3}_stats.txt`
 
 ## Step 5 - Adding rule for taxonomy classification - {wildcards.sample}
 1. `vim Snakefile`
@@ -141,7 +141,7 @@ The las rule will only work for the sample `ERR318619.fastq.gz` but we can use *
 		"""
    ```
 3. Check Snakefile with "dry" run
-  `snakemake -np data/stats/{ERR318619,ERR318620,ERR429199}_stats.txt data/taxonomy/{ERR318619,ERR318620,ERR429199}.lca.tsv`
+  `snakemake -np data/stats/{Sample1,Sample2,Sample3}_stats.txt data/taxonomy/{Sample1,Sample2,Sample3}.lca.tsv`
 
 ## Step 6 - Adding the last rule, taxonomy visualization
 1. `vim Snakefile`
@@ -192,18 +192,18 @@ The las rule will only work for the sample `ERR318619.fastq.gz` but we can use *
    ```
    
 3. Check Snakefile with "dry" run
-  `snakemake -np data/report/{ERR318619,ERR318620,ERR429199}.report.html data/stats/{ERR318619,ERR318620,ERR429199}_stats.txt`
+  `snakemake -np data/report/{Sample1,Sample2,Sample3}.report.html data/stats/{Sample1,Sample2,Sample3}_stats.txt`
 
 ## Step 7 - Generation of Directed acyclic graph (DAG)
 This graph represents the jobs that Snakemake will perform
 ```
-snakemake data/report/{ERR318619,ERR318620,ERR429199}.report.html data/stats/{ERR318619,ERR318620,ERR429199}_stats.txt --dag | dot -Tsvg > dag.svg
+snakemake data/report/{Sample1,Sample2,Sample3}.report.html data/stats/{Sample1,Sample2,Sample3}_stats.txt --dag | dot -Tsvg > dag.svg
 ```
 
 ## Final step - Rule all
 If rule target is not define, Snakemake will define the first rule as the target rule.
 ```
-SAMPLES= ["ERR318619","ERR318620","ERR429199"]
+SAMPLES= ["Sample1","Sample2","Sample3"]
 
 rule all:
 	input:
