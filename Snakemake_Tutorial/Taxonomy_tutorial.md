@@ -255,5 +255,6 @@ rule taxonomy_visualization:
 	shell:
 		"mmseqs taxonomyreport {input.DB} {input.results} {output} --report-mode 1"
 ```
-
+Visualization of DAG
+```snakemake --dag | dot -Tsvg > dag.svg```
 
