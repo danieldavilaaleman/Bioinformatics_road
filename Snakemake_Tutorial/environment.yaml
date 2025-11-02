@@ -1,0 +1,10 @@
+name: snakemake-tutorial
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - snakemake
+  - fastp
+  - mmseqs2
+  - graphviz
