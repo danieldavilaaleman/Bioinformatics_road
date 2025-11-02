@@ -140,7 +140,7 @@ The las rule will only work for the sample `ERR318619.fastq.gz` but we can use *
 		mmseqs createtsv {wildcards.sample}.DB {wildcards.sample}.lca_results {wildcards.sample}.lca.tsv
 		"""
    ```
-   3. Check Snakefile with "dry" run
+3. Check Snakefile with "dry" run
   `snakemake -np data/stats/{ERR318619,ERR318620,ERR429199}_stats.txt data/taxonomy/{ERR318619,ERR318620,ERR429199}.lca.tsv`
 
 
