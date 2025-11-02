@@ -261,3 +261,5 @@ rule taxonomy_visualization:
 Visualization of DAG
 ```snakemake --dag | dot -Tsvg > dag.svg```
 
+## Running the Snakemake pipeline
+```snakemake --cores 8 --sdm conda```
