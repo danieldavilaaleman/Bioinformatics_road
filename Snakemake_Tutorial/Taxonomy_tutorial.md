@@ -40,7 +40,20 @@ Each fastq file is a downsample file of 10,000 reads for demostration purpose.
 
 ## Step 3 - Create a Snakemake file and the first pipeline rule
 1. `vim Snakemake`
-2. 
+2. Add the first rule of the pipeline to run `fastp` tool
+```
+rule clean_reads:
+	input:
+		"data/raw_reads/ERR318619.fastq.gz"
+	output:
+		"data/clean_reads/ERR318619_clean.fastq.gz"
+	conda:
+		"/path/to/miniconda3/envs/snakemake-tutorial"
+	shell:
+		"fastp -i {input} -o {output}"
+```
+
+
 
 
 
