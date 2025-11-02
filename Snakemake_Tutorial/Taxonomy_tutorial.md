@@ -35,4 +35,11 @@ dependencies:
 ```
 
 ## Step 2 - Download Sequencing data
-Download sample data for our pipeline. This data is part of the [Tara Oceans Foundation](https://www.ebi.ac.uk/ena/browser/view/PRJEB402) 
+Download sample data for our pipeline. This data is part of the [Tara Oceans Foundation.](https://www.ebi.ac.uk/ena/browser/view/PRJEB402)
+Each fastq file is a downsample file of 10,000 reads for demostration purpose.
+
+## Step 3 - Create a Snakemake file and the first pipeline rule
+
+
+
+
