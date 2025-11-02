@@ -34,4 +34,5 @@ dependencies:
 
 ```
 
-
+## Step 2 - Download Sequencing data
+Download sample data for our pipeline. This data is part of the [Tara Oceans Foundation](https://www.ebi.ac.uk/ena/browser/view/PRJEB402) 
