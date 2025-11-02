@@ -39,6 +39,8 @@ Download sample data for our pipeline. This data is part of the [Tara Oceans Fou
 Each fastq file is a downsample file of 10,000 reads for demostration purpose.
 
 ## Step 3 - Create a Snakemake file and the first pipeline rule
+1. `vim Snakemake`
+2. 
 
 
 
