@@ -182,13 +182,16 @@ The las rule will only work for the sample `Sample1.fastq.gz` but we can use **w
    rule taxonomy_visualization:
 	input:
 		DB="data/mmseqs_DB/uniprot_sprot",
-		results="data/taxonomy/{sample}.lca_results"
+		results="data/taxonomy/{sample}.lca_results.dbtype"
 	output:
 		"data/report/{sample}.report.html"
 	conda:
 		"/Users/danieldavila/miniconda3/envs/snakemake-tutorial"
 	shell:
-		"mmseqs taxonomyreport {input.DB} {input.results} {output} --report-mode 1"
+		"""
+		new_name=$(basename {input.results} .dbtype)
+		mmseqs taxonomyreport {input.DB} data/taxonomy/$new_name {output} --report-mode 1
+		"""
    ```
    
 3. Check Snakefile with "dry" run
