@@ -130,14 +130,13 @@ The las rule will only work for the sample `Sample1.fastq.gz` but we can use **w
 	input:
 		"data/clean_reads/{sample}_clean.fastq.gz"
 	output:
-		"data/taxonomy/{sample}.lca.tsv"
+		"data/taxonomy/{sample}.lca_results.dbtype"
 	conda:
 		"/Users/danieldavila/miniconda3/envs/snakemake-tutorial"
 	shell:
 		"""
-		mmseqs createdb {input} {wildcards.sample}.DB
-		mmseqs taxonomy {wildcards.sample}.DB data/mmseqs_DB/data/mmseqs_DB/uniprot_sprot {wildcards.sample}.lca_results tmp -s 2
-		mmseqs createtsv {wildcards.sample}.DB {wildcards.sample}.lca_results {wildcards.sample}.lca.tsv
+		mmseqs createdb {input} data/taxonomy/{wildcards.sample}.DB
+		mmseqs taxonomy data/taxonomy/{wildcards.sample}.DB data/mmseqs_DB/uniprot_sprot data/taxonomy/{wildcards.sample}.lca_results data/taxonomy/tmp -s 2
 		"""
    ```
 3. Check Snakefile with "dry" run
@@ -170,14 +169,15 @@ The las rule will only work for the sample `Sample1.fastq.gz` but we can use **w
 	input:
 		"data/clean_reads/{sample}_clean.fastq.gz"
 	output:
-		"data/taxonomy/{sample}.lca_results"
+		"data/taxonomy/{sample}.lca_results.dbtype"
 	conda:
 		"/Users/danieldavila/miniconda3/envs/snakemake-tutorial"
 	shell:
 		"""
 		mmseqs createdb {input} data/taxonomy/{wildcards.sample}.DB
-		mmseqs taxonomy data/taxonomy/{wildcards.sample}.DB data/mmseqs_DB/uniprot_sprot data/taxonomy/{wildcards.sample}.lca_results tmp -s 1
+		mmseqs taxonomy data/taxonomy/{wildcards.sample}.DB data/mmseqs_DB/uniprot_sprot data/taxonomy/{wildcards.sample}.lca_results data/taxonomy/tmp -s 2
 		"""
+
 
    rule taxonomy_visualization:
 	input:
