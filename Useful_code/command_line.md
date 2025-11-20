@@ -1,0 +1,22 @@
+# List of useful scripts
+This is a list of useful commands to data/text manipulation using the command line
+
+#### while read
+```while read -r line; do echo $line;rm -rf $line*; done < ../low_samples_names.txt```
+
+#### pipe
+```cut -f1 | xargs -i {} basename {} .fastq```
+
+#### Summary table with awk
+```
+awk /^===/ {current_file = $3;next}
+!/^#/ && $5 < 1e-6 {counts[current_files][$3]++ }
+END{
+print "File_name", "HMM_Name","Count"
+for (files in counts){
+for (hmm in counts[files]){
+print file,hmm,counts[file][hmm]
+}
+}
+}
+```
