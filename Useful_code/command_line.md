@@ -20,3 +20,14 @@ print file,hmm,counts[file][hmm]
 }
 }
 ```
+
+#### Find missing output
+This for loop is to find the missing output from a large number of files
+```
+for f in *fastq.gz
+do
+if [ ! -f "${f%.fastq.gz}.AGS.out" ]; then
+echo "Missing output for: $f"
+fi
+done
+```
