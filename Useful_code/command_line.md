@@ -31,3 +31,14 @@ echo "Missing output for: $f"
 fi
 done
 ```
+
+#### Another example of finding missing output
+```
+for dir in */
+do
+base=$(basename "$dir")
+if [ ! -f "${base}.AGS.out" ]; then
+echo "Missing output for: $dir"
+fi
+done
+```
