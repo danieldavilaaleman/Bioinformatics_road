@@ -43,8 +43,6 @@ fi
 done
 ```
 
-#### The translate command to replace every "|" to "\n"
-'tr "|" "\n"'
 
 #### Another example of finding missing output using while
 ```
@@ -55,3 +53,6 @@ echo "Missing file for: $line"
 fi
 done < cao.sample.list.txt
 ```
+
+#### The translate command to replace every "|" to "\n"
+`tr "|" "\n"`
