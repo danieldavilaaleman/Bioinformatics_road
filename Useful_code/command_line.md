@@ -43,6 +43,9 @@ fi
 done
 ```
 
+#### The translate command to replace every "|" to "\n"
+'tr "|" "\n"'
+
 #### Another example of finding missing output using while
 ```
 while read -r line
