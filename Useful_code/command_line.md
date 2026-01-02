@@ -42,3 +42,13 @@ echo "Missing output for: $dir"
 fi
 done
 ```
+
+#### Another example of finding missing output using while
+```
+while read -r line
+do echo $line
+if [ ! -f "Cao.et.al/${line}.AGS.out" ]; then
+echo "Missing file for: $line"
+fi
+done < cao.sample.list.txt
+```
